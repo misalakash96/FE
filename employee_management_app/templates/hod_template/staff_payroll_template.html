@@ -1,0 +1,108 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+
+    <!-- <div class="container-fluid">
+        <a class="btn btn-primary" href="{% url 'export_csv' %}" role="button" style="font-size: 15px;">Attendance Report</a> <br/>&nbsp;
+    </div> -->
+        <!-- <div class="container-fluid">
+            <a class="btn btn-primary" href="{% url 'add_attendance' %}" role="button" style="font-size: 15px;">+ Add Attendance</a> <br/>&nbsp; -->
+
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title" style="padding:5px; font-size: medium;">Payroll</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Staff ID</th>
+                                    <!-- <th>Staff Name</th> -->
+                                    <th>Payroll Date</th>
+                                    <th>Total Payroll</th>
+                                    <!-- <th>Attendance Status</th> -->
+                                    <!-- <th>In Time</th>
+                                    <th>Out Time</th> -->
+                                    <!-- <th>Created At</th> -->
+                                    
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                {% for payroll in payroll  %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ payroll.id }}</td>
+                                    <td>{{ payroll.staff_id.admin.id }}</td>
+                                    <td>{{ payroll.payroll_date }}</td>
+                                    <!-- <td>{{ payroll.attendance_message }}</td> -->
+                                    <td>{{payroll.payroll_money }}</td>
+
+                                    <!-- <td>{{payroll.attendance_status }}</td> -->
+                                    <!-- <td>{{attendance.intime }}</td>
+                                    <td>{{attendance.outtime }}</td> -->
+                                    <!-- <td>{{ attendance.created_at }}</td>
+                                    <td>{{ attendance.updated_at }}</td> -->
+                                    <!-- <td></td>
+                                    <td></td>                         -->
+                                    <td>
+                                    
+                                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                                        
+                                        <div class="btn" style="background-color: #555555">
+                                                                                    
+                                            <a href="{}"><span class="glyphicon glyphicon-pencil" style="color: #ffff;"></span></a>&nbsp;
+    
+                                            <a href="{}"  ><span class="glyphicon glyphicon-trash" style="color: #ffff;"></span></a> 
+
+                                    </td>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+
+  {% endblock main_content %}
+
+  {% comment %} Custom JS to Identify the Reply and Post Reply {% endcomment %}
+
+  {% block custom_js %}
+
+  {% endblock custom_js %}

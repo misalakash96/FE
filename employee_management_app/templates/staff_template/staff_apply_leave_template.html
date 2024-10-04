@@ -1,0 +1,142 @@
+{% extends 'staff_template/base_template.html' %}
+
+{% block page_title %}
+    Leave Report and Apply for Leave
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card bg-white">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title">Apply For Leave</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+                    <form method="POST" action="{% url 'staff_apply_leave_save' %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                           
+                            <span class="form-group">
+                                <label>Leave Start Date 
+                                <input type="date" name="leave_startdate" class="form-control" /></label>
+                                </span> &nbsp; &nbsp; &nbsp;
+
+                            <span class="form-group">
+                                <label>Leave End Date 
+                                <input type="date" name="leave_enddate" class="form-control" /> </label>
+                            </span>
+
+                            <div class="form-group">
+                                <label>Leave Reason </label>
+                                <input type="text" name="leave_message" class="form-control" />
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label>Leave Reason </label>
+                                <textarea name="leave_message" class="form-control" rows="6" placeholder="Leave Messge"></textarea>
+                            </div> -->
+
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-outline-primary">Apply for Leave</button>
+                        </div>
+
+                    </form>
+
+                    </div>
+                    <!-- /.card -->
+
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            <h3 class="card-title">Leave Apply History</h3>
+                        </div>
+
+                        <div class="card-body">
+                           <div class="table-responsive">
+                                <table class="table" data-sortable area-sort="ascending">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th><a class="dataTable-sorter">Leave Request ID</a></th>
+                                        <th><a class="dataTable-sorter">Leave Start Date</a></th>
+                                        <th><a class="dataTable-sorter">Leave End Date</a></th>
+                                        <th><a class="dataTable-sorter">Leave Reason</a></th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    
+                                    {% for leave in leave_data %}
+                                    <tr>
+                                        <td>{{ leave.id }}</td>
+                                        <td>{{ leave.leave_startdate }}</td>
+                                        <td>{{ leave.leave_enddate }}</td>
+                                        <td>{{ leave.leave_message }}</td>
+                                        <td>
+                                            {% if leave.leave_status == 1 %}
+                                                <button class="alert alert-success">Approved</button>
+                                            {% elif leave.leave_status == 2 %}
+                                                <button class="alert alert-danger">Rejected</button>
+                                            {% else %}
+                                                <button class="alert alert-warning">Pending</button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}
+
+{% block custom_js %}
+
+{% endblock custom_js %}

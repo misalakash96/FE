@@ -1,0 +1,157 @@
+{% extends 'hod_template/base_template.html' %} 
+{% block main_content %}
+{%load static%}
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">All Staff</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a href="#">Export</a></li>
+      <li class="breadcrumb-item active">Home</li>
+    </ol>
+    {% comment %} {%url 'add_staff' as add_staff%}
+    <a href="{{add_staff}}" class="btn btn-alt-info mr-5 mb-5 btn-outline-primary">
+      &nbsp;Add Staff
+    </a> {% endcomment %}
+    <div class="card mb-4">
+        
+    </div>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple" style="overflow-x: scroll;">
+          <thead>
+            <tr >
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;">
+                    <a class="dataTable-sorter">ID 
+                    </a></th>
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;"><a class="dataTable-sorter">First Name</a></th>
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;"><a class="dataTable-sorter">Last Name</a></th>
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;"><a class="dataTable-sorter">Username</a></th>
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;"><a class="dataTable-sorter">Email</a></th>
+                <!-- <th><a class="dataTable-sorter">Address</a></th> -->
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;"><a class="dataTable-sorter">Last Login</a></th>
+                <!-- <th><a class="dataTable-sorter">Date Joined</a></th> -->
+                <th class="d-sm-table-cell text-center" style="font-size: 13px;">Action</th>
+            </tr>
+          </thead>
+          <!--<tfoot>
+            <tr>
+                <th>Export Date</th>
+                <th>Invoice No.</th>
+                <th>From Site</th>
+                <th>Destination</th>
+                <th>Container No.</th>
+                <th>Driver Name</th>
+                <th>Driver Mob</th>
+                <th>Truck No</th>
+                <th>Container Seal No.</th>
+                <th>Shiping Line</th>
+                <th>Crop</th>
+                <th>Transport Master</th>
+                <th>Acti5ons</th>
+            </tr>
+          </tfoot> -->
+          <tbody>
+            {% for staff in staffs %} 
+            <tr>
+            <td class="d-sm-table-cell text-center" style="font-size: 13px; ;">{{ staff.admin.id }}</td>
+            <td class="d-sm-table-cell text-center" style="font-size: 13px;">{{ staff.admin.first_name }}</td>
+            <td class="d-sm-table-cell text-center" style="font-size: 13px;">{{ staff.admin.last_name }}</td>
+            <td class="d-sm-table-cell text-center" style="font-size: 13px;">{{ staff.admin.username }}</td>
+            <td class="d-sm-table-cell text-center" style="font-size: 13px;">{{ staff.admin.email }}</td>
+            <!-- <td>{{ staff.address }}</td> -->
+            <td class="d-sm-table-cell text-center" style="font-size: 13px;">{{ staff.admin.last_login }}</td>
+            <!-- <td>{{ staff.admin.date_joined }}</td> -->
+            <td>
+                
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                
+                <div class="btn" style="background-color: #555555" >
+                
+                    <a href="{}" > <span class="glyphicon glyphicon-eye-open" style="color: #ffff;"></span></a> &nbsp;
+                
+                    <a href="{% url 'edit_staff' staff.admin.id %}"     ><span class="glyphicon glyphicon-pencil" style="color: #ffff;"></span></a> &nbsp;
+
+                    <a href="{% url 'delete_staff' staff.admin.id %}"  ><span class="glyphicon glyphicon-trash" style="color: #ffff;"></span></a> 
+
+                
+            </div>
+            </td>
+            </tr>
+            
+            {% endfor %}   
+        </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!--<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Export Registration</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item active"></li>
+    </ol>
+    <div class="content">
+      <!-- Dynamic Table Full -->
+      <div class="block">
+        <div class="block-header block-header-default">
+          <!-- <h3 class="block-title">Users </h3> -->
+
+          
+          <!--<?php } ?> -->
+        </div>
+        <div class="block-content">
+          <!-- DataTables functionality is initialized with .js-dataTable-full class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+          <div class="row justify-content-start py-20">
+            <div class="col-lg-12">
+              <!-- <?php
+                            // Include config file
+                            require "connect_db.php";
+
+                            // Attempt select query execution
+                            $sql = "SELECT * FROM inward";
+                            if($result = mysqli_query($conn, $sql)){
+                                if(mysqli_num_rows($result) > 0){
+
+                                    echo " 
+
+              <table
+                class="table table-bordered table-striped table-vcenter js-dataTable-full"
+                style="display: inline-block; overflow-x: scroll"
+              >
+                <thead>
+                  <tr>
+                    <th class="text-center extable" style="width: 15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+
+              {% if not exportData %}
+              <p><em>No records were found.</em></p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main> -->
+
+{% load static %}
+<script src="{% static '/feweather_styling/static/js/plugins.js' %}"></script>
+<script src="{% static '/feweather_styling/static/js/scripts.js' %}"></script>
+<script src="{% static '/feweather_styling/static/js/datatables-simple-demo.js' %}"></script>
+
+{% endblock main_content %}
